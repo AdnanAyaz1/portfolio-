@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site";
 import { aboutFacts } from "@/lib/content";
 
@@ -21,11 +22,13 @@ export function Contact() {
       <div className="container relative z-10">
         {/* 05 ABOUT Section Header */}
         <div className="about-sec-head">
-          <div className="about-sec-left">
-            <span className="about-sec-num">05</span>
-            <h2 className="about-sec-title">Contact</h2>
-          </div>
-          <span className="about-sec-tag">WHO</span>
+          <Reveal className="about-sec-head" variant="up" delay={0.1}>
+            <div className="about-sec-left">
+              <span className="about-sec-num">05</span>
+              <h2 className="about-sec-title">Contact</h2>
+            </div>
+            <span className="about-sec-tag">WHO</span>
+          </Reveal>
         </div>
 
         {/* Top Grid: Quote on Left, Metadata Table on Right */}
@@ -39,11 +42,13 @@ export function Contact() {
 
           <div className="about-facts-col">
             <div className="about-facts-table">
-              {aboutFacts.map((fact) => (
-                <div className="about-fact-row" key={fact.label}>
-                  <span className="about-fact-label">{fact.label}</span>
-                  <span className="about-fact-value">{fact.value}</span>
-                </div>
+              {aboutFacts.map((fact, i) => (
+                <Reveal key={fact.label} className="about-fact-row" variant="up" delay={i * 0.1}>
+                  <div className="about-fact-row">
+                    <span className="about-fact-label">{fact.label}</span>
+                    <span className="about-fact-value">{fact.value}</span>
+                  </div>
+                </Reveal>
               ))}
             </div>
           </div>
