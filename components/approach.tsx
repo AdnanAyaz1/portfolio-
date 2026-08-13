@@ -259,74 +259,12 @@ export function Approach() {
         "(prefers-reduced-motion: reduce)"
       ).matches;
 
-      if (!reduceMotion) {
-        rows.forEach((row, index) => {
-          const circle = row.querySelector<HTMLElement>(
-            ".approach-circle"
-          );
-
-          const text = row.querySelector<HTMLElement>(
-            ".approach-text"
-          );
-
-          const alternate = index % 2 === 1;
-
-          /*
-           * Circle reveal
-           *
-           * The circles pop into place with a small scale
-           * animation and fade.
-           */
-          if (circle) {
-            gsap.fromTo(
-              circle,
-              {
-                opacity: 0,
-                scale: 0.7,
-              },
-              {
-                opacity: 1,
-                scale: 1,
-                duration: 0.7,
-                ease: "back.out(1.7)",
-                scrollTrigger: {
-                  trigger: row,
-                  start: "top 85%",
-                  once: true,
-                },
-              }
-            );
-          }
-
-          /*
-           * Text reveal
-           *
-           * Keep the alternating direction consistent with
-           * the existing left/right layout.
-           */
-          if (text) {
-            gsap.fromTo(
-              text,
-              {
-                opacity: 0,
-                x: alternate ? 40 : -40,
-              },
-              {
-                opacity: 1,
-                x: 0,
-                duration: 0.7,
-                delay: 0.08,
-                ease: "power3.out",
-                scrollTrigger: {
-                  trigger: row,
-                  start: "top 85%",
-                  once: true,
-                },
-              }
-            );
-          }
-        });
-      }
+      /*
+   * Approach row reveal.
+   *
+   * Each row's circle and text now use the Reveal component
+   * for staggered scroll-in animation.
+   */
     }, flow);
 
     const raf = requestAnimationFrame(drawConnector);
@@ -516,26 +454,38 @@ export function Approach() {
                       className="approach-row flex flex-col gap-6 md:flex-row md:items-center md:justify-end md:gap-16"
                     >
                       {/* Circle */}
-                      <div className="flex justify-center md:w-[58%] md:justify-end lg:w-[50%]">
-                        <div className="approach-circle">
-                          {num}
+                      <Reveal
+                        className="approach-circle"
+                        variant={index % 2 === 0 ? "up" : "down"}
+                        delay={index * 0.1}
+                      >
+                        <div className="flex justify-center md:w-[58%] md:justify-end lg:w-[50%]">
+                          <div className="approach-circle">
+                            {num}
+                          </div>
                         </div>
-                      </div>
+                      </Reveal>
 
                       {/* Text */}
-                      <div className="approach-text md:w-1/3">
-                        <p className="approach-step-label">
-                          Step {num}
-                        </p>
+                      <Reveal
+                        className="approach-text"
+                        variant={index % 2 === 0 ? "up" : "down"}
+                        delay={index * 0.1 + 0.08}
+                      >
+                        <div className="approach-text md:w-1/3">
+                          <p className="approach-step-label">
+                            Step {num}
+                          </p>
 
-                        <h3>
-                          {step.title}
-                        </h3>
+                          <h3>
+                            {step.title}
+                          </h3>
 
-                        <p>
-                          {step.description}
-                        </p>
-                      </div>
+                          <p>
+                            {step.description}
+                          </p>
+                        </div>
+                      </Reveal>
                     </div>
                   );
                 }
@@ -551,26 +501,38 @@ export function Approach() {
                     className="approach-row flex flex-col gap-6 md:flex-row md:items-center md:gap-16"
                   >
                     {/* Text */}
-                    <div className="approach-text md:w-1/3">
-                      <p className="approach-step-label">
-                        Step {num}
-                      </p>
+                    <Reveal
+                      className="approach-text"
+                      variant={index % 2 === 0 ? "up" : "down"}
+                      delay={index * 0.1 + 0.08}
+                    >
+                      <div className="approach-text md:w-1/3">
+                        <p className="approach-step-label">
+                          Step {num}
+                        </p>
 
-                      <h3>
-                        {step.title}
-                      </h3>
+                        <h3>
+                          {step.title}
+                        </h3>
 
-                      <p>
-                        {step.description}
-                      </p>
-                    </div>
+                        <p>
+                          {step.description}
+                        </p>
+                      </div>
+                    </Reveal>
 
                     {/* Circle */}
-                    <div className="flex order-first justify-center md:order-none md:w-[58%] md:justify-start lg:w-[50%]">
-                      <div className="approach-circle">
-                        {num}
+                    <Reveal
+                      className="approach-circle"
+                      variant={index % 2 === 0 ? "up" : "down"}
+                      delay={index * 0.1}
+                    >
+                      <div className="flex order-first justify-center md:order-none md:w-[58%] md:justify-start lg:w-[50%]">
+                        <div className="approach-circle">
+                          {num}
+                        </div>
                       </div>
-                    </div>
+                    </Reveal>
                   </div>
                 );
               }
