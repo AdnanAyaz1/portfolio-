@@ -1,7 +1,7 @@
 export const site = {
   name: "Adnan Ayaz Khan",
   /** Canonical domain — update to the real deployment URL before going live. */
-  url: "https://your-valid-deployment-url.com",,
+  url: "https://your-valid-deployment-url.com",
   firstName: "Adnan",
   initials: "AK",
   role: "Full Stack Engineer & AI Systems",
